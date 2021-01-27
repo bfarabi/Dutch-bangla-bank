@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dutch Bangla bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    
+    
+</head>
+<body>
+   <div id="login-area">
+    <h1 class="text-center">Welcome to Dutch Bangla Bank </h1>
+    <div class="submit-area">
+        <h4>Login</h4>
+        <input type="text" name="" id="" placeholder="Email" class="form-control"> <br>
+        <input type="password" name="" id="" placeholder="Password" class="form-control"><br>
+        <button id="login" class="btn btn-success">Enter</button>
+    </div>
+    </div>
+    
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposite status">
+                    <h5>Deposite</h5>
+                    <h2>$ <span id="currentDeposit">00</span> </h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="currentWithdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="currentBalance">1200</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposite</h4>
+                <input type="text" class="form-control" placeholder="$ you want to deposite" id="depositeAmount"><br>
+                <button class="btn btn-success" id="addDeposite">Deposite</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                <input type="text" class="form-control" placeholder="$ you want to withdraw" id="withdrawAmount"><br>
+                <button class="btn btn-success" id="addWithdraw">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script>
+      //login button event handler/
+      const loginBtn=document.getElementById("login");
+      loginBtn.addEventListener("click",function(){
+          const loginArea=document.getElementById("login-area");
+          loginArea.style.display="none";
+          const transactionArea=document.getElementById("transaction-area");
+          transactionArea.style.display="Block";
+      })
+      //deposite button event handler/
+      
+      const depositeBtn=document.getElementById("addDeposite");
+      depositeBtn.addEventListener("click", function(){
+         const depositNumber=getInputNumber("depositeAmount");
+
+            upadateSpanText('currentDeposit', depositNumber);
+            upadateSpanText('currentBalance', depositNumber);
+        
+        document.getElementById("depositeAmount").value="";
+        
+      })
+
+      
+      //withdraw button event handler.
+      const withdrawBtn=document.getElementById("addWithdraw");
+      withdrawBtn.addEventListener("click", function(){
+          const withdrawNumber=getInputNumber('withdrawAmount')
+          
+                upadateSpanText('currentWithdraw', withdrawNumber);
+              upadateSpanText('currentBalance', -1*withdrawNumber);
+
+        document.getElementById("withdrawAmount").value="";
+
+        })
+        function getInputNumber(id) {
+        const Amount=document.getElementById(id).value;
+        const amountNumber=parseFloat(Amount); 
+        return amountNumber;
+      }
+        function upadateSpanText(id, addedNumber) {
+        const currentBalance=document.getElementById(id).innerText;
+        const currentNumber=parseFloat(currentBalance);
+        const totalBalance=addedNumber +currentNumber;
+        document.getElementById(id).innerText=totalBalance;
+    }
+              
+       
+  </script>
+</body>
+</html>
